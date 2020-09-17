@@ -93,6 +93,62 @@ def populated_config(config_path):
     config.save()
     return config
 
+@pytest.fixture
+def invalid_position_type_value_populated_config(config_path):
+    columns = [
+        StringColumn('col1', position=1),
+        StringColumn('col2', position="test"),
+        StringColumn('col3', position=2)
+    ]
+    config = SchemaConfig(config_path,
+                          name='Invalid Populated Config',
+                          description='A Description',
+                          columns=columns)
+    config.save()
+    return config
+
+@pytest.fixture
+def invalid_position_value_lower_than_populated_config(config_path):
+    columns = [
+        StringColumn('col1', position=0),
+        StringColumn('col2', position=3),
+        StringColumn('col3', position=2),
+    ]
+    config = SchemaConfig(config_path,
+                          name='Invalid Populated Config',
+                          description='A Description',
+                          columns=columns)
+    config.save()
+    return config
+
+
+@pytest.fixture
+def invalid_position_value_greater_than_populated_config(config_path):
+    columns = [
+        StringColumn('col1', position=1),
+        StringColumn('col2', position=999),
+        StringColumn('col3', position=2),
+    ]
+    config = SchemaConfig(config_path,
+                          name='Invalid Populated Config',
+                          description='A Description',
+                          columns=columns)
+    config.save()
+    return config
+
+@pytest.fixture
+def invalid_position_values_populated_config(config_path):
+    columns = [
+        StringColumn('col1', position=1),
+        StringColumn('col2', position=3),
+        StringColumn('col3', position=2),
+    ]
+    config = SchemaConfig(config_path,
+                          name='Invalid Populated Config',
+                          description='A Description',
+                          columns=columns)
+    config.save()
+    return config
 
 @pytest.fixture()
 def mk_tempdir():

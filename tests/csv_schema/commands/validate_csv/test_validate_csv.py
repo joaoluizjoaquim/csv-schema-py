@@ -37,6 +37,31 @@ def test_it_validates_the_headers(populated_config, valid_csv_path, invalid_csv_
     assert len(vc.errors) > 0
     assert 'Required column: "col3" not found.' in vc.errors[0]
 
+def testit_validates_invalid_headers_position_type_value(invalid_position_type_value_populated_config, valid_csv_path):
+    vc = ValidateCsv(valid_csv_path, invalid_position_type_value_populated_config.path)
+    vc.execute()
+    assert len(vc.errors) == 1
+    assert 'Position value for column "col2" is not an int.' in vc.errors[0]
+
+def testit_validates_invalid_headers_position_value_lower_than_1(invalid_position_value_lower_than_populated_config, valid_csv_path):
+    vc = ValidateCsv(valid_csv_path, invalid_position_value_lower_than_populated_config.path)
+    vc.execute()
+    assert len(vc.errors) == 1
+    assert 'Position value for column "col1" is lower than 1.' in vc.errors[0]
+
+def testit_validates_invalid_headers_position_value_greater_than_size(invalid_position_value_greater_than_populated_config, valid_csv_path):
+    vc = ValidateCsv(valid_csv_path, invalid_position_value_greater_than_populated_config.path)
+    vc.execute()
+    assert len(vc.errors) == 1
+    assert 'Position value for column "col2" is greater than header size.' in vc.errors[0]
+
+def testit_validates_invalid_headers_position_values(invalid_position_values_populated_config, valid_csv_path):
+    vc = ValidateCsv(valid_csv_path, invalid_position_values_populated_config.path)
+    vc.execute()
+    assert len(vc.errors) == 2
+    assert 'Position value for column "col2" is invalid.' in vc.errors[0]
+    assert 'Position value for column "col3" is invalid.' in vc.errors[1]
+
 
 def test_it_validates_the_data(populated_config, valid_csv_path, invalid_csv_path, mk_csv_file):
     vc = ValidateCsv(valid_csv_path, populated_config.path)

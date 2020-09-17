@@ -22,10 +22,13 @@ def col_required():
 def col_null_or_empty():
     return False
 
+@pytest.fixture
+def col_position():
+    return 1
 
 @pytest.fixture
-def col(col_type, col_name, col_required, col_null_or_empty):
-    return BaseColumn(col_type, col_name, col_required, col_null_or_empty)
+def col(col_type, col_name, col_required, col_null_or_empty, col_position):
+    return BaseColumn(col_type, col_name, col_required, col_null_or_empty, col_position)
 
 
 def test_it_sets_the_column_data(col_type, col_name, col_required, col_null_or_empty, col):
@@ -48,13 +51,14 @@ def test_register_property(col):
     assert len(col.properties) == 1
 
 
-def test_to_dict(col_type, col_name, col_required, col_null_or_empty, col):
+def test_to_dict(col_type, col_name, col_required, col_null_or_empty, col_position, col):
     d = col.to_dict()
-    assert len(d) == 4
+    assert len(d) == 5
     assert d['type'] == col_type
     assert d['name'] == col_name
     assert d['required'] == col_required
     assert d['null_or_empty'] == col_null_or_empty
+    assert d['position'] == col_position
 
 
 def test_to_json(col):

@@ -7,8 +7,8 @@ from .config_property import ConfigProperty
 class StringColumn(BaseColumn):
     COLUMN_TYPE = ColumnTypes.STRING
 
-    def __init__(self, name=None, required=True, null_or_empty=False, regex=None, min=None, max=None):
-        super(StringColumn, self).__init__(self.COLUMN_TYPE, name, required, null_or_empty)
+    def __init__(self, name=None, required=True, null_or_empty=False, position=None, regex=None, min=None, max=None):
+        super(StringColumn, self).__init__(self.COLUMN_TYPE, name, required, null_or_empty, position)
 
         self.regex = self.register_property(
             ConfigProperty('regex', regex, 'Regular expression to validate the column value.')

@@ -4,7 +4,7 @@ from .config_property import ConfigProperty
 
 
 class BaseColumn(BaseConfigObject):
-    def __init__(self, type=None, name=None, required=None, null_or_empty=None):
+    def __init__(self, type=None, name=None, required=None, null_or_empty=None,position=None):
         super(BaseColumn, self).__init__()
 
         self.type = self.register_property(
@@ -12,6 +12,9 @@ class BaseColumn(BaseConfigObject):
         )
         self.name = self.register_property(
             ConfigProperty('name', name, 'The name of the column.')
+        )
+        self.position = self.register_property(
+            ConfigProperty('position', position, 'The column position.')
         )
         self.required = self.register_property(
             ConfigProperty('required', required, 'Whether or not the column is required in the file.')

@@ -50,6 +50,20 @@ class ValidateCsv:
             for column in self.config.columns.value:
                 if column.required.value is True and column.name.value not in headers:
                     self.errors.append('Required column: "{0}" not found.'.format(column.name.value))
+                if column.position.value is not None:
+                    if type(column.position.value) is not int:
+                        self.errors.append('Position value for column "{0}" is not an int.'.format(column.name.value))
+                        break
+                    if column.position.value < 1:
+                        self.errors.append('Position value for column "{0}" is lower than 1.'.format(column.name.value))
+                        break
+                    if column.position.value > len(headers):
+                        self.errors.append('Position value for column "{0}" is greater than header size.'.format(column.name.value))
+                        break
+                    if headers[column.position.value - 1] != column.name.value:
+                        self.errors.append('Position value for column "{0}" is invalid.'.format(column.name.value))
+                        continue
+
         return len(self.errors) == 0
 
     def _validate_data(self):
