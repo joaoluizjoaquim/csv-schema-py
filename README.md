@@ -72,7 +72,8 @@ The CSV file schema definition is defined in a JSON file in the following format
   "null_or_empty": false,
   "regex": null,
   "min": null,
-  "max": null
+  "max": null,
+  "position": null
 }
 ```
 | Property | Description |
@@ -84,6 +85,7 @@ The CSV file schema definition is defined in a JSON file in the following format
 | regex | Regular expression to validate the column value. |
 | min | The minimum length of the string. null for no limit. |
 | max | The maximum length of the string. null for no limit. |
+| position | The position column in header. null for ignore. |
 
 ### integer
 ```json
@@ -94,7 +96,8 @@ The CSV file schema definition is defined in a JSON file in the following format
   "null_or_empty": false,
   "regex": null,
   "min": null,
-  "max": null
+  "max": null,
+  "position": null
 }
 ```
 | Property | Description |
@@ -106,6 +109,7 @@ The CSV file schema definition is defined in a JSON file in the following format
 | regex | Regular expression to validate the column value. |
 | min | The minimum value. null for no limit. |
 | max | The maximum value. null for no limit. |
+| position | The position column in header. null for ignore. |
 
 ### decimal
 ```json
@@ -117,7 +121,8 @@ The CSV file schema definition is defined in a JSON file in the following format
   "regex": null,
   "min": null,
   "max": null,
-  "precision": 2
+  "precision": 2,
+  "position": null
 }
 ```
 | Property | Description |
@@ -130,6 +135,7 @@ The CSV file schema definition is defined in a JSON file in the following format
 | min | The minimum value. null for no limit. |
 | max | The maximum value. null for no limit. |
 | precision | The decimal point precision. |
+| position | The position column in header. null for ignore. |
 
 ### enum
 ```json
@@ -138,7 +144,8 @@ The CSV file schema definition is defined in a JSON file in the following format
   "name": null,
   "required": true,
   "null_or_empty": false,
-  "values": []
+  "values": [],
+  "position": null
 }
 ```
 | Property | Description |
@@ -148,6 +155,7 @@ The CSV file schema definition is defined in a JSON file in the following format
 | required | Whether or not the column is required in the file. |
 | null_or_empty | Whether or not the value can be null (missing) or an empty string. |
 | values | Fixed set of constants. |
+| position | The position column in header. null for ignore. |
 
 ## Development
 
